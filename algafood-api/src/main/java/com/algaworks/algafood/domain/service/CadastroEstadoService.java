@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
+import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Estado;
 import com.algaworks.algafood.domain.repository.EstadoRepository;
 
@@ -34,6 +36,9 @@ public class CadastroEstadoService {
 		} catch (DataIntegrityViolationException e) {	
 			throw new EntidadeEmUsoException(
 					String.format("O Estado de Código %d está sendo utilizado", estadoId));
+		} catch (EmptyResultDataAccessException e) {
+			throw new EntidadeNaoEncontradaException(
+					String.format("O Estado de Código %d não existe", estadoId));
 		}
 	}
 
