@@ -43,8 +43,7 @@ public class EstadoController {
 		return cadastroEstadoService.salvar(estado);
 	}
 
-	@DeleteMapping("/{estadoId}")
-	//TODO: ARRUMAR ESTE MÉTODO, ERRO 500
+	@DeleteMapping("/{estadoId}")	
 	public ResponseEntity<?> remover(@PathVariable Long estadoId) {
 		try {
 			cadastroEstadoService.remover(estadoId);
