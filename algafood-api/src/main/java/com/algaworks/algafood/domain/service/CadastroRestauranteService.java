@@ -1,7 +1,6 @@
 package com.algaworks.algafood.domain.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,11 +26,12 @@ public class CadastroRestauranteService {
 	}
 
 	public Restaurante buscar(Long restauranteId) {
-		Optional<Restaurante> restaurante = restauranteRepository.findById(restauranteId);
-		if(restaurante.isPresent()) {
-			return restaurante.get();
-		}
-		throw new EntidadeNaoEncontradaException(String.format("Não há restaurante cadastrado com o ID %d", restauranteId));
+		Restaurante restaurante = restauranteRepository.findById(restauranteId)
+				.orElseThrow(() -> new EntidadeNaoEncontradaException(
+						String.format("Não há restaurante cadastrado com o ID %d", restauranteId)));
+
+		return restaurante;
+
 	}
 
 	public Restaurante salvar(Restaurante restaurante) {
