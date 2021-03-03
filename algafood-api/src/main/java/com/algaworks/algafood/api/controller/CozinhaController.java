@@ -35,7 +35,7 @@ public class CozinhaController {
 
 	@GetMapping
 	public List<Cozinha> listar() {
-		return cozinhaRepository.findAll();
+		return cadastroCozinha.listar();
 	}
 
 	@GetMapping(value = "/{cozinhaId}")
